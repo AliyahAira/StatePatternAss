@@ -1,13 +1,10 @@
 public class VendingMachine {
     private VendingMachineState state;
-    private int inventory;
-    private int balance;
-    private final int ITEM_PRICE = 5; // Fixed price for simplicity
+    int balance = 0;
+    final int itemPrice = 50;
 
-    public VendingMachine(int inventory) {
-        this.inventory = inventory;
-        this.balance = 0;
-        this.state = new IdleState(); // Initial state
+    public VendingMachine() {
+        this.state = new IdleState();
     }
 
     public void setState(VendingMachineState newState) {
@@ -25,34 +22,8 @@ public class VendingMachine {
     public void dispenseItem() {
         state.dispenseItem(this);
     }
-
+    
     public void setOutOfOrder() {
         state.setOutOfOrder(this);
-    }
-
-    public void addBalance(int amount) {
-        balance += amount;
-    }
-
-    public void setBalance(int balance) {
-        this.balance = balance;
-    }
-
-    public int getBalance() {
-        return balance;
-    }
-
-    public int getItemPrice() {
-        return ITEM_PRICE;
-    }
-
-    public int getInventory() {
-        return inventory;
-    }
-
-    public void decreaseInventory() {
-        if (inventory > 0) {
-            inventory--;
-        }
     }
 }

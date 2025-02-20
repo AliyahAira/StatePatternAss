@@ -1,29 +1,19 @@
 public class ItemSelectedState implements VendingMachineState {
-    @Override
     public void selectItem(VendingMachine machine) {
-        System.out.println("Item already selected.");
+        System.out.println("Item already selected. Please insert coins.");
     }
-
-    @Override
     public void insertCoin(VendingMachine machine, int amount) {
-        machine.addBalance(amount);
-        System.out.println("Inserted $" + amount + ". Current balance: $" + machine.getBalance());
-
-        if (machine.getBalance() >= machine.getItemPrice()) {
-            System.out.println("Balance sufficient. Dispensing item...");
+        System.out.println("Inserted coin: " + amount);
+        machine.balance += amount;
+        if (machine.balance >= machine.itemPrice) {
             machine.setState(new DispensingState());
-            machine.dispenseItem(); // Auto-trigger dispensing
         }
     }
-
-    @Override
     public void dispenseItem(VendingMachine machine) {
-        System.out.println("Insert more coins before dispensing.");
+        System.out.println("Insufficient funds. Please insert more coins.");
     }
-
-    @Override
     public void setOutOfOrder(VendingMachine machine) {
-        System.out.println("Vending machine is now out of order.");
+        System.out.println("Machine is now out of order.");
         machine.setState(new OutOfOrderState());
     }
 }
